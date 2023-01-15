@@ -20,7 +20,6 @@ std::vector<int> Solution::twoSum(std::vector<int>& nums, int target)
 
 int Solution::reverse(int x)
 {
-
     int reversed = 0;
     int pop = 0;
     while(x != 0)
@@ -70,9 +69,9 @@ int Solution::romanToInt(std::string s)
     for(int index(0); index < s.length(); index++)
     {
         if (symbols[s[index]] < symbols[s[index + 1]])
-            result = result - symbols[s[index]];
+            result -= symbols[s[index]];
         else
-            result = result + symbols[s[index]];
+            result += symbols[s[index]];
     }
     return result;
 }
@@ -80,23 +79,15 @@ int Solution::romanToInt(std::string s)
 std::string Solution::longestCommonPrefix(std::vector<std::string>& strs) 
 {
     if (strs.size() == 0) return "";
-    // Grab first word
     std::string prefix = strs[0];
-    // Loop the array of words
     for (int i(1); i < strs.size(); i++)
     {
         std::string s = strs[i];
-        // Check if words  is empty and prefix is empty
-        if (s.length() == 0 && prefix == "") return "";
-        // Construct new substring with min val between prefix a new word
         prefix = prefix.substr(0, std::min(prefix.length(), s.length()) );
-        // Loop throught char
         for (int k = 0; k < prefix.length() && s.length(); k++)
         {
-            // If char do not match
             if (s[k] != prefix[k])
             {
-                // Create new substring upto char location
                  prefix = prefix.substr(0, k);
                 break;
             }
