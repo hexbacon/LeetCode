@@ -11,9 +11,11 @@ This repo will serve a as a guide and tracker of all LeetCode problem solve be m
 
 [Palindrome Number](#palindrome-number)
 
-[Roman to Integer](#Roman-to-Integer)
+[Roman to Integer](#roman-to-integer)
 
 [Longest Common Prefix](#longest-common-prefix)
+
+[Add Two Numbers](#add-two-numbers)
 
 ## Solutions
 
@@ -50,7 +52,6 @@ Output: [0,1]
 **Solution:**
 
 A good solution for thsi problem involves using a map. In *C++* a map is a type of associative container. We can solve the problem in the following way:
-
     1. Loop throught the array of number.
     2. Check if the following key exist:
         a. Check if key with value target - nums[index] exist.
@@ -117,7 +118,6 @@ Output: 21
 **Solution:**
 
 Using the modulos operator, it is easy to extra the last digit from the integer.
-
     1. Create integer variables reversed and pop.
     2. Use % (mod) 10 to extract last digit from x.
     3. Divide x by 10.
@@ -186,7 +186,6 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 **Solution:**
 
 An easy solution to this problem involves reversing:
-
     1. Convert integer to string.
     2. Create a copy of the string and reverse it.
     3. Compare return the comparison of both string.
@@ -271,7 +270,6 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 **Solution*:**
 
 We can utilize an map to store the roman character with its corresponding value, then loop throught the string reading each character and adding them as we go, all this while keeping track of rules.
-
     1. Create map to store roman character.
     2. Itirate the string reading each character.
     3. Compare current character with character at position index + 1.
@@ -336,7 +334,6 @@ Explanation: There is no common prefix among the input strings.
 **Solution:**
 
 A good solution for this problem involves an *Horizontal Scanning* algorithm. We can solve the problem in the following way:
-
     1. Check if vector is empty.
     2. Select the first word in the vector, this would be a prefix.
     3. Loop throught the vector starting at position 1.
@@ -377,6 +374,84 @@ public:
             }
         }
         return prefix;
+    }
+};
+```
+
+### Add Two Numbers
+
+You are given two **non-empty linked** lists representing two non-negative integers. The digits are stored in **reverse order**, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+**Example 1:**
+
+```text
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807.
+```
+
+```text
+Input: l1 = [0], l2 = [0]
+Output: [0]
+```
+
+```text
+Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Output: [8,9,9,9,0,0,0,1]
+```
+
+**Constraints:**
+
+* The number of nodes in each linked list is in the range [1, 100].
+* 0 <= Node.val <= 9
+* It is guaranteed that the list represents a number that does not have leading zeros.
+
+**Solution:**
+
+A good solution for the problem would be the following:
+    1. Loop until both inputs are equal to nullptr.
+    2. If one input is nullptr and the other one is not, consider the input value as 0.
+    3. Add values to a new node.
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
+    {
+        ListNode * dummy = new ListNode(0);
+        ListNode *ans = dummy;
+        bool complete = false;
+        int carry = 0;
+        int sum = 0;
+        while(l1 != nullptr || l2 != nullptr || carry != 0)
+        {
+            int val_1 = l1 ? l1->val : 0;
+            int val_2 = l2 ? l2->val : 0;
+            // New Digits
+            sum = val_1 + val_2 + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+
+            // Update
+            ans->next = new ListNode(sum);
+            // Update ptrs
+            ans = ans->next;
+            l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
+        }
+        return dummy->next;
     }
 };
 ```
