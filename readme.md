@@ -17,6 +17,8 @@ This repo will serve a as a guide and tracker of all LeetCode problem solve be m
 
 [Add Two Numbers](#add-two-numbers)
 
+[Time Conversion](#time-conversion)
+
 ## Solutions
 
 ### Two Sum
@@ -454,4 +456,76 @@ public:
         return dummy->next;
     }
 };
+```
+
+### Time Conversion
+
+Given a time in 12-hour AM/PM format, convert it to military (24-hour) time.
+
+Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+
+* 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+
+**Example 1:**
+
+```text
+Input: s = "12:01:00PM"
+Outout: "12:01:00"
+```
+
+```text
+Input s = "12:01:00AM"
+Output: "00:01:00"
+```
+
+**Constraints:**
+
+* All input times are valid
+
+**Solution:**
+
+A solution to this problem in reading the 9th character of the string. If the char is A, then we check if the leading characters are equal to 12, if yes, add 00 to the answer string and add the substring starting from the 3rd character to the end, otherwise just copy the string. If it's P, then add 12 to the leading characters and check if it over 24.
+
+```c++
+string timeConversion(string s) 
+{
+    bool am = false;
+    string ans = "";
+    if (s.length() == 0 || s.length() < 10)
+        return ans;
+    if (s[8] == 'A')
+        am = true;
+    if (am)
+    {
+        if (s.substr(0,2) == "12")
+        {
+            ans += "00";
+            ans += s.substr(2, 6);
+        }
+        else
+            ans = s.substr(0, 8);
+    }
+    else
+    {
+        if (s.substr(0,2) == "12")
+            ans += s.substr(0, 8);
+        else
+        {
+            int toAdd = stoi(s.substr(0, 2));
+            toAdd += 12;
+            cout << "toAdd: " << toAdd << endl;
+            if(toAdd == 24)
+            {
+                ans += "00";
+                ans += s.substr(2, 6);
+            }
+            else
+            {
+                ans += to_string(toAdd);
+                ans += s.substr(2, 6);
+            }
+        }
+    }
+    return ans;
+}
 ```
