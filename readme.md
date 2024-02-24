@@ -85,6 +85,20 @@ public:
 };
 ```
 
+```python
+def twoSum(nums, target):
+    # Create dict to hold answer
+    res = dict()
+    for idx, num in enumerate(nums):
+        # if target - number is a key, return answer
+        if res.get(target - num) != None:
+            print("Found it")
+            return sorted([idx, res.get(target - num)])
+        # if answer is not found, add idx to the dict
+        res[num] = idx
+    return [-1,-1]
+```
+
 ### Reverse Integer
 
 Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
