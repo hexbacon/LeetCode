@@ -1,7 +1,7 @@
 
-# LeetCode Progress
+# LeetCode & HackerRank Progress
 
-This repo will serve a as a guide and tracker of all LeetCode problem solve be me. The intentation is to keep constantly updating my progress with new and better solutions.
+This repo will serve a as a guide and tracker of all LeetCode & HackerRank problem solve be me. The intentation is to keep constantly updating my progress with new and better solutions.
 
 ## LeetCode Problems
 
