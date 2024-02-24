@@ -10,4 +10,20 @@ def twoSum(nums, target):
         res[num] = idx
     return [-1,-1]
 
-print(twoSum([1,2,4,5,6], 11))
+
+def reverse(num):
+    result = str(num)
+    sign = 1
+    if result[0] == '-':
+        result_reverse = result[:0:-1]
+        print(result_reverse)
+        sign = -1
+    else:
+        result_reverse = result[::-1]
+    return int(result_reverse) * sign
+
+def isPalindrome(num):
+    num_list = str(num)
+    num_list_rev = num_list[::-1]
+
+    return num_list == num_list_rev

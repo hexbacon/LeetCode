@@ -165,6 +165,23 @@ public:
 };
 ```
 
+**Solution Python**
+
+A Simple solution in Python is casting the value into a list and then using reverse slicing to reverse the number. This approach is simple but bring a conditional statement for negative number.
+
+```python
+def reverse(num):
+    result = str(num)
+    sign = 1
+    if result[0] == '-':
+        result_reverse = result[:0:-1]
+        print(result_reverse)
+        sign = -1
+    else:
+        result_reverse = result[::-1]
+    return int(result_reverse) * sign
+```
+
 ### Palindrome Number
 
 Given an integer x, return true if x is a palindrome, and false otherwise.
