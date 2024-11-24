@@ -246,6 +246,19 @@ public:
 };
 ```
 
+```python
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        # If x is neg
+        if x < 0:
+            return False
+        elif x >= 0 and x < 10:
+            return True
+        else:
+            return str(x) == str(x)[::-1]
+
+```
+
 ### Roman to Integer
 
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M
@@ -337,6 +350,27 @@ public:
         return result;
     }
 };
+```
+
+```python
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        symbols = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        res = 0
+        for idx in range(len(s)):
+            if idx != len(s) - 1 and symbols[s[idx]] < symbols[s[idx+1]]:
+                res -= symbols[s[idx]]
+            else:
+                res += symbols[s[idx]]
+        return res
 ```
 
 ### Longest Common Prefix
