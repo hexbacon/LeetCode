@@ -21,6 +21,8 @@ This repo will serve a as a guide and tracker of all LeetCode & HackerRank probl
 
 [Sqrt(x)](#sqrt(x))
 
+[Valid Parentheses](#valid-parentheses)
+
 ## Solutions
 
 ### Two Sum
@@ -636,4 +638,77 @@ def mySqrt(self, x: int) -> int:
             else:
                 R = M - 1
         return R
+```
+
+### Valid Parentheses
+
+Given a string s containing just the characters ```'('```, ```')'```, ```'{'```, ```'}```', ```'['``` and ```']'```, determine if the input string is valid.
+
+An input string is valid if:
+
+1. Open brackets must be closed by the same type of brackets.
+
+2. Open brackets must be closed in the correct order.
+
+3. Every close bracket has a corresponding open bracket of the same type.
+
+**Example 1:**
+
+```text
+Input: s = "()"
+
+Output: true
+```
+
+**Example 2:**
+
+```text
+Input: s = "()[]{}"
+
+Output: true
+```
+
+**Example 3:**
+
+```text
+Input: s = "(]"
+
+Output: false
+```
+
+**Example 4:**
+
+```text
+Input: s = "([])"
+
+Output: true
+```
+
+**Solution**
+
+```c++
+class Solution {
+public:
+    bool isValid(std::string s) 
+    {
+        std::stack<char> tracker;
+        char prev = s[0];
+        tracker.push(prev);
+
+        for (int idx = 1; idx < s.length(); idx++) {
+            if (prev == char(s[idx] - 1) || prev == char(s[idx] - 2)) {
+                tracker.pop();
+                prev = !tracker.empty() ? tracker.top() : 0;
+            } else {
+                tracker.push(s[idx]);
+                prev = s[idx];
+            }
+        }
+        return tracker.empty();
+    }
+};
+```
+
+```python
+
 ```
